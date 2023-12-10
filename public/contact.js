@@ -7,19 +7,16 @@ onAuthStateChanged(auth, function (user) {
 });
 
 function submitForm() {
-    // Obter os dados do formulário
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value;
     var message = document.getElementById('message').value;
 
-    // Construir objeto com os dados do formulário
     var formData = {
         name: name,
         email: email,
         message: message
     };
 
-    // Enviar dados do formulário para o endpoint do Formspree
     fetch('https://formspree.io/matheus.sico@hotmail.com', {
         method: 'POST',
         headers: {
@@ -29,7 +26,7 @@ function submitForm() {
     })
         .then(response => response.json())
         .then(data => {
-            // Processar a resposta do servidor (pode exibir uma mensagem de sucesso, etc.)
+            console.log(data);  // Adicionando um log para visualizar a resposta
             alert('Mensagem enviada com sucesso!');
         })
         .catch(error => {
