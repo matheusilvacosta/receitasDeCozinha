@@ -70,7 +70,7 @@ function loadRecipes(orderByParams, order) {
 
         const tempo = document.createElement("p");
         tempo.classList.add("card-text");
-        tempo.textContent = `Time: ${recipe.time}`;
+        tempo.textContent = `Tempo: ${recipe.time} Minutos`;
 
         const categoria = document.createElement("p");
         categoria.classList.add("card-text");
