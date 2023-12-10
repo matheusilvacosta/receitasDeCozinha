@@ -1,4 +1,10 @@
-import { auth, onAuthStateChanged, signOut, db } from "./authModule.js";
+import {
+  auth,
+  onAuthStateChanged,
+  signOut,
+  db,
+  updateProfile,
+} from "./authModule.js";
 import {
   collection,
   getDocs,
@@ -6,16 +12,38 @@ import {
   orderBy,
   getDoc,
   updateDoc,
-  doc
+  doc,
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
-onAuthStateChanged(auth, function (user) {
+
+
+onAuthStateChanged(auth, async function (user) {
   if (user) {
     showUserEmail(user.email);
     loadRecipes("name");
     addLogoutButton();
+    localStorage.setItem("@user", user.email);
+    localStorage.setItem("@isAdmin", user.emailVerified);
+    const btnCreate = document.getElementById("btn-create");
+    disableButton(btnCreate, user.emailVerified)
+   
   } else {
     window.location.href = "./pages/auth.html";
+  }
+});
+
+function disableButton(button, isAdmin){
+  if (!isAdmin) {
+    button.style.display = "none";
+  }
+}
+
+document.getElementById("btn-create").addEventListener("", () => {
+  const isAdmin = localStorage.getItem("@isAdmin");
+  const btnCreate = document.getElementById("btn-create");
+
+  if (isAdmin == "false") {
+    btnCreate.style.display = "none";
   }
 });
 
@@ -30,6 +58,7 @@ function addLogoutButton() {
   var logoutButton = document.getElementById("logoutButton");
   if (logoutButton) {
     logoutButton.addEventListener("click", function () {
+      localStorage.removeItem("@isAdmin");
       signOut(auth)
         .then(() => {
           window.location.href = "./pages/auth.html";
@@ -90,7 +119,9 @@ function loadRecipes(orderByParams, order) {
           window.location.href = recipeURL;
         });
 
-        const colorBtn = JSON.parse(localStorage.getItem(`@like-button-${data.id}`));
+        const colorBtn = JSON.parse(
+          localStorage.getItem(`@like-button-${data.id}`)
+        );
 
         const likeButton = document.createElement("button");
         likeButton.style.marginLeft = "1rem";
@@ -113,7 +144,7 @@ function loadRecipes(orderByParams, order) {
             await updateDoc(recipeDocRef, {
               likes: docSnapshot.data().likes + 1,
             });
-            window.location.reload()
+            window.location.reload();
             return;
           }
 

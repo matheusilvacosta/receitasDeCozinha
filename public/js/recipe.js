@@ -1,5 +1,26 @@
-import { collection, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+import { collection, doc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 import { db } from './authModule.js';
+
+window.addEventListener('load', ()=> {
+    const isAdmin = localStorage.getItem("@isAdmin");
+    const btnDelete = document.getElementById("btn-delete");
+    if(isAdmin === "false"){
+        btnDelete.style.display = 'none'
+    }
+})
+
+document.getElementById('btn-delete').addEventListener('click', async function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const recipeId = urlParams.get('id');
+
+    var confirmExit = confirm('Tem certeza que deseja excluir?');
+  
+    if (confirmExit) {
+        const docRef = doc(db, "recipes", recipeId);
+        await deleteDoc(docRef);
+        window.location.href = "../index.html"
+    }
+  });
 
 // Função para carregar detalhes da receita
 async function loadRecipeDetails() {

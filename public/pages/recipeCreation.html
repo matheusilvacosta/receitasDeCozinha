@@ -32,8 +32,8 @@
             </div>
 
             <div class="form-group">
-                <label for="imgUpload">Upload de Imagem:</label>
-                <input type="file" class="form-control-file" id="imgUpload" name="imgUpload" accept="image/*" required>
+                <label for="name">URL da imagem:</label>
+                <input type="text" class="form-control" id="imageURL" name="name" required>
             </div>
 
             <div class="form-group">
@@ -53,7 +53,7 @@
                 <input type="number" class="form-control" id="time" name="time" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Salvar Receita</button>
+            <button id="btn-save-recipe" type="button" class="btn btn-primary">Salvar Receita</button>
         </form>
 
         <div class="row mt-3">
@@ -75,7 +75,7 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
-    <script type="module" src="recipeCreation.js"></script>
+    <script type="module" src="../js/recipeCreation.js"></script>
 
 </body>
 

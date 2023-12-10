@@ -2,6 +2,7 @@ import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Googl
 
 function redirectIfAuthenticated() {
   onAuthStateChanged(auth, function (user) {
+    var email = document.getElementById('loginEmail').value;
     if (user) {
       window.location.href = '../index.html';
     }
