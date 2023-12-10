@@ -34,10 +34,8 @@ function addLogoutButton() {
 function loadRecipes(filter) {
     var recipeList = document.getElementById('recipeList');
 
-    const recipesCollection = collection(db, 'recipes');
-
     // Adicione a ordenação pela data de criação
-    const q = query(collection(db, "recipes"), orderBy("createdAt", "asc"));
+    const q = query(collection(db, "recipes"), orderBy("createdAt", "desc"));
 
     getDocs(q)
         .then((querySnapshot) => {
@@ -48,7 +46,8 @@ function loadRecipes(filter) {
                 var recipe = doc.data();
 
                 // Adiciona a verificação de filtro
-                if (!filter || filter === 'recentes' || (filter === 'menor-tempo' && recipe.time < 30) || (filter === 'favoritas' && recipe.likesBy.length > 0)) {
+                if (!filter || filter === 'recentes' || (filter === 'menor-tempo' && recipe.time < 30) || 
+                (filter === 'favoritas' && recipe.likesBy.length > 0)) {
                     var recipeCard = document.createElement('div');
                     recipeCard.className = 'col-md-4 mb-4';
 
@@ -58,7 +57,7 @@ function loadRecipes(filter) {
                   <h5 class="card-title">${recipe.name}</h5>
                   <p class="card-text">Tempo: ${recipe.time}</p>
                   <p class="card-text">Categoria: ${recipe.category}</p>
-                  <p class="card-text">Curtidas: ${recipe.likesBy.length}</p>
+                  <p class="card-text">Curtidas: ${recipe.likes}</p>
                   <button class="btn btn-primary" onclick="viewRecipe('${doc.id}')">Ver Receita</button>
                 </div>
               </div>
