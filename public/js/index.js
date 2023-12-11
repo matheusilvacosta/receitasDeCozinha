@@ -73,12 +73,10 @@ function addLogoutButton() {
 function loadRecipes(orderByParams, order) {
   var recipeList = document.getElementById("recipeList");
 
-  // Adicione a ordenação pela data de criação
   const q = query(collection(db, "recipes"), orderBy(orderByParams, order));
 
   getDocs(q)
     .then((querySnapshot) => {
-      // Limpa a lista de receitas antes de adicionar novas
       recipeList.innerHTML = "";
 
       querySnapshot.forEach((data) => {
@@ -188,7 +186,6 @@ function loadRecipes(orderByParams, order) {
     });
 }
 
-// Adicione event listeners para os botões de filtro
 document
   .getElementById("recentesButton")
   .addEventListener("click", function () {

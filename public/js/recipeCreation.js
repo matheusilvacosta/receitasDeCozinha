@@ -2,10 +2,10 @@ import { db } from "./authModule.js";
 import {
   collection,
   addDoc,
-  deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
 const btnSave = document.getElementById("btn-save-recipe");
+btnSave.addEventListener("click", createRecipe);
 
 document.getElementById('backButton').addEventListener('click', function () {
   var confirmExit = confirm('Tem certeza que deseja voltar? Suas mudanças não salvas serão perdidas.');
@@ -30,7 +30,7 @@ async function createRecipe() {
     preparation: preparation.split(";").map((o) => o.trim()),
     createdAt: new Date(),
     time,
-    recipeCreator: localStorage.getItem("@user"),
+    creator: localStorage.getItem("@user"),
     ingredients: ingredients.split(";").map((o) => o.trim()),
     likes: 0,
   };
