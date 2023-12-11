@@ -22,13 +22,10 @@ document.getElementById('btn-delete').addEventListener('click', async function (
     }
   });
 
-// Função para carregar detalhes da receita
 async function loadRecipeDetails() {
-    // Obtém o ID da receita da URL
     const urlParams = new URLSearchParams(window.location.search);
     const recipeId = urlParams.get('id');
 
-    // Substitua 'recipes' pelo nome da sua coleção no Firestore
     const recipesCollection = collection(db, 'recipes');
     const recipeDocRef = doc(recipesCollection, recipeId);
 

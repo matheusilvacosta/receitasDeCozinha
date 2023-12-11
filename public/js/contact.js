@@ -12,18 +12,23 @@ async function sendContact() {
   const email = document.getElementById("email").value;
   const message = document.getElementById("message").value;
 
+  if (!name || !email || !message) {
+    alert("Por favor, preencha todos os campos antes de enviar.");
+    return;
+  }
+
   const newContact = {
-    name: name,
-    email: email,
-    message: message,
+    name,
+    email,
+    message,
   };
 
   const contactCollection = collection(db, "contact");
   try {
     const novoDocRef = await addDoc(contactCollection, newContact);
     alert("Mensagem enviada!");
-    window.location.href = "../index.html"
+    window.location.href = "../index.html";
   } catch (err) {
-    alert("Aconteceu um erro inesperado!")
+    alert("Aconteceu um erro inesperado!");
   }
 }

@@ -23,6 +23,11 @@ async function createRecipe() {
   const preparation = document.getElementById("preparation").value;
   const time = document.getElementById("time").value;
 
+  if (!recipeName || !category || !imageURL || !ingredients || !preparation || !time) {
+    alert("Por favor, preencha todos os campos antes de cadastrar a receita.");
+    return;
+  }
+
   const newRecipe = {
     name: recipeName,
     category,
@@ -39,8 +44,8 @@ async function createRecipe() {
   try {
     const novoDocRef = await addDoc(recipesCollection, newRecipe);
     alert("Receita cadastrada");
-    window.location.href = "../index.html"
+    window.location.href = "../index.html";
   } catch (err) {
-    alert("Aconteceu um erro inesperado!")
+    alert("Aconteceu um erro inesperado!");
   }
 }

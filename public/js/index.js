@@ -3,7 +3,6 @@ import {
   onAuthStateChanged,
   signOut,
   db,
-  updateProfile,
 } from "./authModule.js";
 import {
   collection,
@@ -14,8 +13,6 @@ import {
   updateDoc,
   doc,
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-
-
 
 onAuthStateChanged(auth, async function (user) {
   if (user) {
